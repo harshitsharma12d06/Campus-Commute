@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Commute - Student Ride-Sharing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --primary-color: #4CAF50; 
+            --secondary-color: #388E3C; 
+            --background-color: #f4f7f6; 
+            --text-color: #1F2937;
+            --light-text-color: #6B7280;
+            --card-bg: #FFFFFF;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 0.8)), url('https://placehold.co/1920x1080/E8F5E9/4CAF50?text=Campus+Commute') no-repeat center center/cover;
+        }
+
+        .chat-bubble-user {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 1.5rem 1.5rem 0 1.5rem;
+        }
+
+        .chat-bubble-other {
+            background-color: #E5E7EB;
+            color: var(--text-color);
+            border-radius: 1.5rem 1.5rem 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                font-size: 0.875rem;
+                padding: 0.75rem 1.5rem;
+            }
+            .chat-container {
+                max-height: 60vh;
+            }
+            .header-nav {
+                flex-grow: 1;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Landing Page View -->
+    <div id="landing-page" class="w-full">
+        <header class="flex justify-between items-center p-6 bg-white shadow-lg sticky top-0 z-10">
+            <div class="text-2xl font-bold text-green-600">Campus Commute</div>
+            <nav class="flex items-center space-x-4 header-nav">
+                <a href="#features" class="text-gray-600 hover:text-green-600 font-medium hidden md:block">Features</a>
+                <a href="#how-it-works" class="text-gray-600 hover:text-green-600 font-medium hidden md:block">How It Works</a>
+                <a href="#about" class="text-gray-600 hover:text-green-600 font-medium hidden md:block">About Us</a>
+                <button id="cta-header" class="cta-button bg-green-600 text-white py-2 px-6 rounded-full font-semibold shadow-md">Join Now</button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero-section flex items-center justify-center text-center h-[70vh] border-b-2 border-green-600">
+                <div class="p-4 md:p-8 rounded-lg bg-white/70 backdrop-blur-sm">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Smart travel, safe travel.</h1>
+                    <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-6">Rides that are <span class="font-bold text-green-700">cheaper, safer, and convenient.</span></p>
+                    <button id="cta-hero" class="cta-button bg-green-600 text-white py-3 px-8 rounded-full font-bold text-lg shadow-lg">Get Started</button>
+                </div>
+            </section>
+
+            <section id="features" class="py-16 text-center bg-gray-50">
+                <h2 class="text-4xl font-bold text-gray-800 mb-12">Why Campus Commute?</h2>
+                <div class="flex flex-wrap justify-center gap-8 px-4">
+                    <div class="bg-white p-8 rounded-xl shadow-lg max-w-xs transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl mb-4">🛡️</div>
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">Safer</h3>
+                        <p class="text-gray-600">Verified students by college ID for a secure community.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg max-w-xs transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl mb-4">💰</div>
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">Cheaper</h3>
+                        <p class="text-gray-600">No fees, just split the cost of the ride directly with your peer.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg max-w-xs transform hover:scale-105 transition-transform duration-300">
+                        <div class="text-5xl mb-4">⏱️</div>
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">Convenient</h3>
+                        <p class="text-gray-600">Find rides easily from students on your campus, saving you time and hassle.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how-it-works" class="py-16 text-center">
+                <h2 class="text-4xl font-bold text-gray-800 mb-12">How It Works</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-10 px-4">
+                    <div class="flex items-center space-x-6 p-6 bg-white rounded-xl shadow-md w-full max-w-md">
+                        <div class="w-12 h-12 flex-shrink-0 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                        <p class="text-gray-700">Sign up with your college email and verify your student ID.</p>
+                    </div>
+                    <div class="flex items-center space-x-6 p-6 bg-white rounded-xl shadow-md w-full max-w-md">
+                        <div class="w-12 h-12 flex-shrink-0 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                        <p class="text-gray-700">Request or offer a ride to a fellow student on your campus.</p>
+                    </div>
+                    <div class="flex items-center space-x-6 p-6 bg-white rounded-xl shadow-md w-full max-w-md">
+                        <div class="w-12 h-12 flex-shrink-0 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                        <p class="text-gray-700">Connect, share the cost, and enjoy your cheap and safe ride!</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="text-center py-8 text-gray-600 text-sm">
+                &copy; 2024 Campus Commute. All rights reserved.
+            </footer>
+        </main>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="main-app" class="hidden w-full min-h-screen flex items-center justify-center p-4">
+        <header class="w-full flex justify-between items-center p-6 bg-white shadow-lg fixed top-0 left-0 right-0 z-10">
+            <div class="text-2xl font-bold text-green-600 cursor-pointer" id="app-logo">Campus Commute</div>
+            <nav class="flex items-center space-x-4">
+                <button id="profile-button" class="text-sm text-green-600 hover:underline">My Profile</button>
+                <button id="logout-button" class="text-sm text-red-600 hover:underline">Log Out</button>
+            </nav>
+        </header>
+        <div id="app-content" class="pt-24 w-full"></div>
+    </div>
+    
+    <!-- Modal message box elements -->
+    <div id="messageBox" class="fixed top-6 right-4 p-4 rounded-lg shadow-xl text-white transition-opacity duration-300 opacity-0 transform-gpu translate-y-4 z-50"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection, addDoc, onSnapshot, query, where, updateDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+        
+        // IMPORTANT: Your specific Firebase configuration.
+        const firebaseConfig = {
+            apiKey: "xxxxxxxxxxxx",
+            authDomain: "xxxxxxxxx",
+            projectId: "xxxxxxx",
+            storageBucket: "xxxxxxxx",
+            messagingSenderId: "xxxxxxxx",
+            appId: "xxxxxx"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const storage = getStorage(app);
+        const appId = "xxxx";
+
+        // UI element references
+        const landingPage = document.getElementById('landing-page');
+        const mainApp = document.getElementById('main-app');
+        const appContent = document.getElementById('app-content');
+        const messageBox = document.getElementById('messageBox');
+        const ctaHeader = document.getElementById('cta-header');
+        const ctaHero = document.getElementById('cta-hero');
+        const logoutButton = document.getElementById('logout-button');
+        const profileButton = document.getElementById('profile-button');
+        const appLogo = document.getElementById('app-logo');
+
+        let userState = {
+            isLoggedIn: false,
+            userId: null,
+            userRole: null,
+            profile: null
+        };
+        
+        let currentListeners = [];
+
+        function cleanupListeners() {
+            currentListeners.forEach(unsubscribe => unsubscribe());
+            currentListeners = [];
+        }
+
+        // --- Utility Functions ---
+        function showMessage(message, type = 'Success') {
+            messageBox.textContent = message;
+            messageBox.classList.remove('opacity-0', 'translate-y-4', 'bg-red-500', 'bg-green-500');
+            messageBox.classList.add('opacity-100', 'translate-y-0');
+            if (type === 'Error') {
+                messageBox.classList.add('bg-red-500');
+            } else {
+                messageBox.classList.add('bg-green-500');
+            }
+            setTimeout(() => {
+                messageBox.classList.remove('opacity-100', 'translate-y-0');
+                messageBox.classList.add('opacity-0', 'translate-y-4');
+            }, 3000);
+        }
+
+        function formatDate(isoString) {
+            const date = new Date(isoString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${day}/${month}/${year} ${hours}:${minutes}`;
+        }
+        
+        const returnToLanding = () => {
+            landingPage.classList.remove('hidden');
+            mainApp.classList.add('hidden');
+            cleanupListeners();
+        };
+
+        // --- UI Rendering Functions ---
+        const renderLogin = () => {
+            cleanupListeners();
+            appContent.innerHTML = `
+                <div class="text-center">
+                    <h1 class="text-3xl font-bold text-gray-800">Welcome Back</h1>
+                    <p class="text-gray-500 mt-2">Log in to find or post a ride.</p>
+                </div>
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <input type="email" id="login-email" placeholder="Email" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <input type="password" id="login-password" placeholder="Password" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <button type="submit" class="w-full py-3 px-4 rounded-lg font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">Log In</button>
+                </form>
+                <div class="text-center mt-4 space-y-2">
+                    <p class="text-sm text-gray-600">Don't have an account? <a href="#" id="show-signup" class="text-green-600 hover:underline">Sign up here</a></p>
+                    <button id="back-to-landing" class="text-sm text-gray-600 hover:underline">&larr; Back</button>
+                </div>
+            `;
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('show-signup').addEventListener('click', (e) => { e.preventDefault(); renderSignup(); });
+            document.getElementById('back-to-landing').addEventListener('click', returnToLanding);
+        };
+
+        const renderSignup = () => {
+            cleanupListeners();
+            appContent.innerHTML = `
+                <div class="text-center">
+                    <h1 class="text-3xl font-bold text-gray-800">Join Campus Commute</h1>
+                    <p class="text-gray-500 mt-2">Create your account and select your role.</p>
+                </div>
+                <form id="signup-form" class="space-y-4">
+                    <div>
+                        <input type="text" id="signup-name" placeholder="Full Name" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <input type="text" id="signup-location" placeholder="Campus/Location" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <input type="email" id="signup-email" placeholder="Email" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <input type="password" id="signup-password" placeholder="Password" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">I am a...</label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer w-1/2">
+                                <input type="radio" name="role" value="rider" required>
+                                <span class="text-gray-700">Rider</span>
+                            </label>
+                            <label class="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer w-1/2">
+                                <input type="radio" name="role" value="driver" required>
+                                <span class="text-gray-700">Driver</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3 px-4 rounded-lg font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">Sign Up</button>
+                </form>
+                <div class="text-center mt-4 space-y-2">
+                    <p class="text-sm text-gray-600">Already have an account? <a href="#" id="show-login" class="text-green-600 hover:underline">Log in here</a></p>
+                    <button id="back-to-landing" class="text-sm text-gray-600 hover:underline">&larr; Back</button>
+                </div>
+            `;
+            document.getElementById('signup-form').addEventListener('submit', handleSignup);
+            document.getElementById('show-login').addEventListener('click', (e) => { e.preventDefault(); renderLogin(); });
+            document.getElementById('back-to-landing').addEventListener('click', returnToLanding);
+        };
+
+        const renderDriverDashboard = () => {
+            cleanupListeners();
+            appContent.innerHTML = `
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2 md:mb-0">Driver Dashboard</h1>
+                </div>
+                <p class="text-gray-500 mb-6">Hello, ${userState.profile.name}! Post a new ride for your fellow students.</p>
+                <div class="space-y-4 p-6 bg-gray-50 rounded-lg">
+                    <h2 class="text-lg font-semibold text-gray-700">Post a New Ride</h2>
+                    <form id="post-ride-form" class="space-y-4">
+                        <div>
+                            <input type="text" id="pickup-location" placeholder="Pickup Location" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="text" id="dropoff-location" placeholder="Drop-off Location" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="datetime-local" id="ride-time" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center space-x-2 p-3 bg-white rounded-lg border border-gray-300 cursor-pointer w-1/2">
+                                    <input type="radio" name="vehicle-type" value="2-wheeler" required>
+                                    <span class="text-gray-700">2-Wheeler</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-3 bg-white rounded-lg border border-gray-300 cursor-pointer w-1/2">
+                                    <input type="radio" name="vehicle-type" value="4-wheeler" required>
+                                    <span class="text-gray-700">4-Wheeler</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="text" id="car-model" placeholder="Car Model (e.g., Maruti Swift)" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="text" id="car-number" placeholder="Car Number Plate" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="number" id="available-seats" placeholder="Available Seats" min="1" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="number" id="ride-fare" placeholder="Fare per person" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <button type="submit" class="w-full py-3 px-4 rounded-lg font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">Post Ride</button>
+                    </form>
+                </div>
+                <div id="ride-requests-container" class="mt-8 space-y-4">
+                    <h2 class="text-xl font-semibold text-gray-800">My Posted Rides</h2>
+                    <div id="posted-rides-list" class="space-y-4">
+                        <p class="text-center text-gray-500">No posted rides.</p>
+                    </div>
+                </div>
+                <div id="incoming-requests-container" class="mt-8 space-y-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Incoming Ride Requests</h2>
+                    <div id="ride-requests-list" class="space-y-4">
+                        <p class="text-center text-gray-500">No new requests.</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('post-ride-form').addEventListener('submit', handlePostRide);
+            listenForRideRequests();
+            listenForPostedRides();
+        };
+
+        const renderRiderDashboard = () => {
+            cleanupListeners();
+            appContent.innerHTML = `
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2 md:mb-0">Rider Dashboard</h1>
+                </div>
+                <p class="text-gray-500 mb-6">Hello, ${userState.profile.name}! Available rides posted by your peers:</p>
+                <div class="space-y-4 p-6 bg-gray-50 rounded-lg">
+                    <h2 class="text-lg font-semibold text-gray-700">Find a Ride</h2>
+                    <form id="search-ride-form" class="space-y-2">
+                        <div>
+                            <input type="text" id="search-pickup" placeholder="Pickup Location" class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="text" id="search-dropoff" placeholder="Drop-off Location" class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <button type="submit" class="w-full py-3 px-4 rounded-lg font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">Search Rides</button>
+                    </form>
+                </div>
+                <div id="rides-list" class="mt-8 space-y-4">
+                    <!-- Rides will be dynamically loaded here -->
+                </div>
+                <div id="active-chats-container" class="mt-8 space-y-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Active Chats</h2>
+                    <div id="active-chats-list" class="space-y-4">
+                        <p class="text-center text-gray-500">No active chats.</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('search-ride-form').addEventListener('submit', handleRideSearch);
+            fetchRides();
+            listenForAcceptedRequests();
+        };
+
+        const renderProfile = () => {
+            cleanupListeners();
+            appContent.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-2xl font-bold text-gray-800">My Profile</h1>
+                    <button id="back-to-dashboard" class="text-green-600 hover:underline text-sm md:text-base">&larr; Back to Dashboard</button>
+                </div>
+                <div class="flex flex-col items-center space-y-4 p-6 bg-white rounded-xl shadow-lg">
+                    <img id="profile-pic" src="${userState.profile.profilePicUrl}" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-green-400">
+                    <h2 id="profile-name" class="text-xl font-bold">${userState.profile.name}</h2>
+                    <p id="profile-location" class="text-gray-600">${userState.profile.location}</p>
+                </div>
+                <div class="mt-8 space-y-4 p-6 bg-gray-50 rounded-lg">
+                    <h2 class="text-lg font-semibold text-gray-700">Edit Profile</h2>
+                    <form id="edit-profile-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Change Profile Picture</label>
+                            <input type="file" id="edit-profile-pic" accept="image/*" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
+                        </div>
+                        <div>
+                            <input type="text" id="edit-name" value="${userState.profile.name}" placeholder="Full Name" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="text" id="edit-location" value="${userState.profile.location}" placeholder="Campus/Location" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <button type="submit" class="w-full py-3 px-4 rounded-lg font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">Update Profile</button>
+                    </form>
+                </div>
+            `;
+            document.getElementById('back-to-dashboard').addEventListener('click', () => {
+                userState.userRole === 'driver' ? renderDriverDashboard() : renderRiderDashboard();
+            });
+            document.getElementById('edit-profile-form').addEventListener('submit', handleEditProfile);
+        };
+
+        const renderEditRide = (rideId, rideData) => {
+            cleanupListeners();
+            appContent.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-2xl font-bold text-gray-800">Edit Ride</h1>
+                    <button id="back-to-dashboard" class="text-green-600 hover:underline text-sm md:text-base">&larr; Back to Dashboard</button>
+                </div>
+                <div class="space-y-4 p-6 bg-gray-50 rounded-lg">
+                    <h2 class="text-lg font-semibold text-gray-700">Editing Ride: ${rideData.pickup} to ${rideData.dropoff}</h2>
+                    <form id="edit-ride-form" class="space-y-4">
+                        <div>
+                            <input type="text" id="edit-pickup" value="${rideData.pickup}" placeholder="Pickup Location" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="text" id="edit-dropoff" value="${rideData.dropoff}" placeholder="Drop-off Location" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="datetime-local" id="edit-time" value="${rideData.time}" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="number" id="edit-seats" value="${rideData.seats}" placeholder="Available Seats" min="1" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="number" id="edit-fare" value="${rideData.fare}" placeholder="Fare per person" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                        <button type="submit" class="w-full py-3 px-4 rounded-lg font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">Update Ride</button>
+                    </form>
+                </div>
+            `;
+            document.getElementById('back-to-dashboard').addEventListener('click', () => {
+                userState.userRole === 'driver' ? renderDriverDashboard() : renderRiderDashboard();
+            });
+            document.getElementById('edit-ride-form').addEventListener('submit', (e) => handleEditRide(e, rideId));
+        };
+
+        const renderChat = (chatId, otherUser) => {
+            cleanupListeners();
+            appContent.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <button id="back-to-dashboard" class="text-green-600 hover:underline text-sm md:text-base">&larr; Back to Dashboard</button>
+                    <h1 class="text-lg md:text-xl font-bold text-gray-800">Chat with ${otherUser.name}</h1>
+                </div>
+                <div id="messages-container" class="bg-gray-100 p-4 rounded-lg chat-container overflow-y-auto space-y-4 flex flex-col-reverse" style="height: 60vh;">
+                    <!-- Messages will be dynamically loaded here -->
+                </div>
+                <form id="message-form" class="mt-4 flex space-x-2">
+                    <input type="text" id="message-input" placeholder="Type a message..." required class="flex-grow p-3 border border-gray-300 rounded-lg">
+                    <button type="submit" class="py-3 px-6 rounded-lg font-semibold text-white bg-green-600 hover:bg-green-700 transition-colors">Send</button>
+                </form>
+            `;
+            document.getElementById('message-form').addEventListener('submit', (e) => handleSendMessage(e, chatId));
+            document.getElementById('back-to-dashboard').addEventListener('click', () => {
+                userState.userRole === 'driver' ? renderDriverDashboard() : renderRiderDashboard();
+            });
+            listenForChatMessages(chatId);
+        };
+
+        const renderRidesList = async (rides) => {
+            const ridesList = document.getElementById('rides-list');
+            if (!ridesList) return;
+            ridesList.innerHTML = '';
+            if (rides.length === 0) {
+                ridesList.innerHTML = `
+                    <div class="text-center text-gray-500 space-y-4 p-8 bg-gray-50 rounded-lg shadow-sm">
+                        <p>No rides available for this route.</p>
+                        <button id="back-to-dashboard-from-search" class="text-green-600 hover:underline text-sm md:text-base">&larr; Back to Dashboard</button>
+                    </div>
+                `;
+                document.getElementById('back-to-dashboard-from-search').addEventListener('click', renderRiderDashboard);
+                return;
+            }
+            const users = await fetchUserProfiles(rides.map(r => r.driverId));
+            rides.forEach(ride => {
+                const driver = users[ride.driverId] || { name: 'Unknown User', location: 'Unknown' };
+                const rideItem = document.createElement('div');
+                rideItem.className = 'bg-white p-4 rounded-lg shadow-sm space-y-2';
+                rideItem.innerHTML = `
+                    <div class="flex items-center space-x-4 mb-2">
+                        <img src="${driver.profilePicUrl}" alt="Profile Picture" class="w-12 h-12 rounded-full border-2 border-green-400">
+                        <div>
+                            <p class="font-semibold text-gray-800">${driver.name}</p>
+                            <p class="text-sm text-gray-500">${driver.location}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-green-700">${ride.pickup} ➡️ ${ride.dropoff}</span>
+                        <span class="text-sm text-gray-600">${formatDate(ride.time)}</span>
+                    </div>
+                    <p class="text-sm text-gray-500">Vehicle: ${ride.carModel} (${ride.vehicleType}) - ${ride.carNumber}</p>
+                    <p class="text-sm text-gray-500">Available seats: ${ride.seats}</p>
+                    <p class="text-sm text-gray-500">Proposed Fare: ₹${ride.fare} per person</p>
+                    <div class="mt-2 flex items-center space-x-2">
+                        <input type="number" min="1" max="${ride.seats}" value="1" id="seats-to-book-${ride.id}" class="w-20 p-2 border border-gray-300 rounded-lg">
+                        <button class="flex-grow py-2 rounded-lg font-semibold text-white bg-green-500 hover:bg-green-600 transition-colors" data-ride-id="${ride.id}" data-driver-id="${ride.driverId}">Request to Join</button>
+                    </div>
+                `;
+                ridesList.appendChild(rideItem);
+            });
+            document.querySelectorAll('[data-ride-id]').forEach(button => {
+                button.addEventListener('click', handleRequestToJoin);
+            });
+        };
+        
+        const renderPostedRidesList = (rides) => {
+            const postedRidesList = document.getElementById('posted-rides-list');
+            if (!postedRidesList) return;
+            postedRidesList.innerHTML = '';
+            if (rides.length === 0) {
+                postedRidesList.innerHTML = '<p class="text-center text-gray-500">No posted rides.</p>';
+                return;
+            }
+            rides.forEach(ride => {
+                const rideItem = document.createElement('div');
+                rideItem.className = 'bg-white p-4 rounded-lg shadow-sm space-y-2';
+                rideItem.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-green-700">${ride.pickup} ➡️ ${ride.dropoff}</span>
+                        <span class="text-sm text-gray-600">${formatDate(ride.time)}</span>
+                    </div>
+                    <p class="text-sm text-gray-500">Vehicle: ${ride.carModel} (${ride.vehicleType}) - ${ride.carNumber}</p>
+                    <p class="text-sm text-gray-500">Available seats: ${ride.seats}</p>
+                    <p class="text-sm text-gray-500">Proposed Fare: ₹${ride.fare} per person</p>
+                    <p class="text-sm text-gray-500">Status: <span class="font-medium text-green-500">${ride.status}</span></p>
+                    ${ride.status === 'available' ? `
+                    <button class="w-full mt-2 py-2 rounded-lg font-semibold text-white bg-gray-500 hover:bg-gray-600 transition-colors" data-edit-ride-id="${ride.id}" data-ride-data='${JSON.stringify(ride)}'>Edit Ride</button>
+                    <button class="w-full mt-2 py-2 rounded-lg font-semibold text-white bg-red-500 hover:bg-red-600 transition-colors" data-delete-ride-id="${ride.id}">Delete Ride</button>
+                    ` : ''}
+                `;
+                postedRidesList.appendChild(rideItem);
+            });
+            document.querySelectorAll('[data-edit-ride-id]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const rideId = e.target.getAttribute('data-edit-ride-id');
+                    const rideData = JSON.parse(e.target.getAttribute('data-ride-data'));
+                    renderEditRide(rideId, rideData);
+                });
+            });
+            document.querySelectorAll('[data-delete-ride-id]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const rideId = e.target.getAttribute('data-delete-ride-id');
+                    handleDeleteRide(rideId);
+                });
+            });
+        };
+        
+        const renderRideRequests = async (requests) => {
+            const requestsList = document.getElementById('ride-requests-list');
+            if (!requestsList) return;
+            
+            if (requests.length === 0) {
+                requestsList.innerHTML = '<p class="text-center text-gray-500">No new requests.</p>';
+                return;
+            }
+            requestsList.innerHTML = '';
+            const users = await fetchUserProfiles(requests.map(r => r.riderId));
+            
+            requests.forEach(request => {
+                const rider = users[request.riderId] || { name: 'Unknown User' };
+                const requestItem = document.createElement('div');
+                requestItem.className = 'bg-green-100 p-4 rounded-lg flex flex-col md:flex-row justify-between items-center';
+                requestItem.innerHTML = `
+                    <p class="text-sm font-medium text-gray-800">New request from <span class="font-bold">${rider.name}</span> for ride <span class="font-bold">${request.rideId.substring(0, 8)}...</span></p>
+                    <div class="mt-2 md:mt-0">
+                        <button class="bg-green-600 text-white px-4 py-2 rounded-full text-sm hover:bg-green-700" data-ride-id="${request.rideId}" data-rider-id="${request.riderId}" data-request-id="${request.id}" data-seats-requested="${request.seatsRequested}">Accept</button>
+                        <button class="bg-red-600 text-white px-4 py-2 rounded-full text-sm hover:bg-red-700 ml-2" data-reject-request-id="${request.id}">Reject</button>
+                    </div>
+                `;
+                requestsList.appendChild(requestItem);
+            });
+            
+            document.querySelectorAll('[data-ride-id]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const rideId = e.target.getAttribute('data-ride-id');
+                    const riderId = e.target.getAttribute('data-rider-id');
+                    const requestId = e.target.getAttribute('data-request-id');
+                    const seatsRequested = e.target.getAttribute('data-seats-requested');
+                    handleAcceptRequest(rideId, riderId, requestId, seatsRequested);
+                });
+            });
+
+            document.querySelectorAll('[data-reject-request-id]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const requestId = e.target.getAttribute('data-reject-request-id');
+                    handleRejectRequest(requestId);
+                });
+            });
+        };
+        
+        const renderActiveChats = async (chats) => {
+            const activeChatsList = document.getElementById('active-chats-list');
+            if (!activeChatsList) return;
+            activeChatsList.innerHTML = '';
+
+            if (chats.length === 0) {
+                activeChatsList.innerHTML = '<p class="text-center text-gray-500">No active chats.</p>';
+                return;
+            }
+
+            const otherUserIds = chats.map(chat => chat.driverId === userState.userId ? chat.riderId : chat.driverId);
+            const otherUsers = await fetchUserProfiles(otherUserIds);
+
+            chats.forEach(chat => {
+                const otherUser = otherUsers[chat.driverId === userState.userId ? chat.riderId : chat.driverId];
+                const chatItem = document.createElement('div');
+                chatItem.className = 'bg-white p-4 rounded-lg shadow-sm flex items-center space-x-4 cursor-pointer hover:bg-gray-100 transition-colors';
+                chatItem.innerHTML = `
+                    <img src="${otherUser.profilePicUrl}" alt="Profile Picture" class="w-12 h-12 rounded-full border-2 border-green-400">
+                    <div>
+                        <p class="font-semibold text-gray-800">Chat with ${otherUser.name}</p>
+                        <p class="text-sm text-gray-500">Ride: ${chat.rideId.substring(0,8)}...</p>
+                    </div>
+                `;
+                chatItem.addEventListener('click', () => renderChat(chat.id, otherUser));
+                activeChatsList.appendChild(chatItem);
+            });
+        };
+
+
+        // --- Firebase Auth & Firestore Handlers ---
+        const handleLogin = async (e) => {
+            e.preventDefault();
+            const email = e.target['login-email'].value;
+            const password = e.target['login-password'].value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                showMessage("Login failed: " + error.message, 'Error');
+            }
+        };
+
+        const handleSignup = async (e) => {
+            e.preventDefault();
+            const name = e.target['signup-name'].value;
+            const location = e.target['signup-location'].value;
+            const email = e.target['signup-email'].value;
+            const password = e.target['signup-password'].value;
+            const role = e.target.querySelector('input[name="role"]:checked').value;
+            
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                const userProfileRef = doc(db, `artifacts/${appId}/users/${user.uid}/profile`, 'info');
+                await setDoc(userProfileRef, {
+                    name: name,
+                    location: location,
+                    email: user.email,
+                    profilePicUrl: `https://api.dicebear.com/7.x/initials/svg?seed=${name}`,
+                    role: role,
+                    isVerified: false,
+                    joinedAt: new Date().toISOString()
+                });
+
+                showMessage("Account created successfully! Welcome to Campus Commute.", 'Success');
+            } catch (error) {
+                showMessage("Signup failed: " + error.message, 'Error');
+            }
+        };
+
+        const handlePostRide = async (e) => {
+            e.preventDefault();
+            if (!userState.isLoggedIn || userState.userRole !== 'driver') {
+                showMessage("You must be logged in as a driver to post a ride.", 'Error');
+                return;
+            }
+            const pickup = e.target['pickup-location'].value;
+            const dropoff = e.target['dropoff-location'].value;
+            const time = e.target['ride-time'].value;
+            const seats = parseInt(e.target['available-seats'].value);
+            const fare = parseFloat(e.target['ride-fare'].value);
+            const vehicleType = e.target.querySelector('input[name="vehicle-type"]:checked').value;
+            const carModel = e.target['car-model'].value;
+            const carNumber = e.target['car-number'].value;
+
+            try {
+                const ridesCollectionRef = collection(db, `artifacts/${appId}/public/data`, 'rides');
+                await addDoc(ridesCollectionRef, {
+                    driverId: userState.userId,
+                    pickup,
+                    dropoff,
+                    time,
+                    seats,
+                    fare,
+                    vehicleType,
+                    carModel,
+                    carNumber,
+                    status: 'available',
+                    timestamp: new Date().toISOString()
+                });
+                showMessage("Ride posted successfully!", 'Success');
+                e.target.reset();
+            } catch (error) {
+                showMessage("Failed to post ride: " + error.message, 'Error');
+            }
+        };
+
+        const handleDeleteRide = async (rideId) => {
+            try {
+                const rideRef = doc(db, `artifacts/${appId}/public/data/rides`, rideId);
+                await deleteDoc(rideRef);
+                showMessage("Ride deleted successfully!", 'Success');
+                renderDriverDashboard();
+            } catch (error) {
+                showMessage("Failed to delete ride: " + error.message, 'Error');
+            }
+        };
+
+        const handleEditRide = async (e, rideId) => {
+            e.preventDefault();
+            const pickup = e.target['edit-pickup'].value;
+            const dropoff = e.target['edit-dropoff'].value;
+            const time = e.target['edit-time'].value;
+            const seats = parseInt(e.target['edit-seats'].value);
+            const fare = parseFloat(e.target['edit-fare'].value);
+
+            try {
+                const rideRef = doc(db, `artifacts/${appId}/public/data/rides`, rideId);
+                await updateDoc(rideRef, {
+                    pickup,
+                    dropoff,
+                    time,
+                    seats,
+                    fare
+                });
+                showMessage("Ride updated successfully!", 'Success');
+                renderDriverDashboard();
+            } catch (error) {
+                showMessage("Failed to update ride: " + error.message, 'Error');
+            }
+        };
+
+        const handleEditProfile = async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('edit-name').value;
+            const location = document.getElementById('edit-location').value;
+            const profilePicFile = document.getElementById('edit-profile-pic').files[0];
+
+            try {
+                const userProfileRef = doc(db, `artifacts/${appId}/users/${userState.userId}/profile`, 'info');
+                let newProfilePicUrl = userState.profile.profilePicUrl;
+
+                if (profilePicFile) {
+                    const storageRef = ref(storage, `user-profiles/${userState.userId}/${profilePicFile.name}`);
+                    await uploadBytes(storageRef, profilePicFile);
+                    newProfilePicUrl = await getDownloadURL(storageRef);
+                }
+
+                await updateDoc(userProfileRef, {
+                    name,
+                    location,
+                    profilePicUrl: newProfilePicUrl
+                });
+                userState.profile.name = name;
+                userState.profile.location = location;
+                userState.profile.profilePicUrl = newProfilePicUrl;
+                showMessage("Profile updated successfully!", 'Success');
+                userState.userRole === 'driver' ? renderDriverDashboard() : renderRiderDashboard();
+            } catch (error) {
+                showMessage("Failed to update profile: " + error.message, 'Error');
+            }
+        };
+
+        const handleRequestToJoin = async (e) => {
+            const rideId = e.target.getAttribute('data-ride-id');
+            const driverId = e.target.getAttribute('data-driver-id');
+            const seatsRequested = document.getElementById(`seats-to-book-${rideId}`).value;
+            
+            if (!userState.isLoggedIn || userState.userRole !== 'rider') {
+                showMessage("Please log in as a rider to request a ride.", 'Error');
+                return;
+            }
+
+            try {
+                const rideRequestsRef = collection(db, `artifacts/${appId}/users/${driverId}/rideRequests`);
+                await addDoc(rideRequestsRef, {
+                    rideId: rideId,
+                    riderId: userState.userId,
+                    seatsRequested: parseInt(seatsRequested),
+                    status: 'pending',
+                    timestamp: new Date().toISOString()
+                });
+                showMessage("Ride request sent!", 'Success');
+            } catch (error) {
+                showMessage("Failed to send ride request: " + error.message, 'Error');
+            }
+        };
+
+        const handleAcceptRequest = async (rideId, riderId, rideRequestId, seatsRequested) => {
+            try {
+                // Fetch the current ride to get available seats
+                const rideRef = doc(db, `artifacts/${appId}/public/data/rides`, rideId);
+                const rideDoc = await new Promise((resolve) => {
+                    const unsubscribe = onSnapshot(rideRef, (doc) => {
+                        unsubscribe();
+                        resolve(doc);
+                    });
+                });
+                const rideData = rideDoc.data();
+
+                if (rideData.seats >= seatsRequested) {
+                    const newSeatCount = rideData.seats - seatsRequested;
+                    await updateDoc(rideRef, { seats: newSeatCount });
+                    
+                    const rideRequestRef = doc(db, `artifacts/${appId}/users/${userState.userId}/rideRequests`, rideRequestId);
+                    await updateDoc(rideRequestRef, { status: 'accepted' });
+
+                    const chatId = `${rideId}_${userState.userId}_${riderId}`;
+                    const chatRef = doc(db, `artifacts/${appId}/public/chats`, chatId);
+                    await setDoc(chatRef, {
+                        driverId: userState.userId,
+                        riderId: riderId,
+                        rideId: rideId,
+                        createdAt: new Date().toISOString()
+                    });
+                    
+                    showMessage("Request accepted! Chat is now open.", 'Success');
+                    const riderProfile = await fetchUserProfiles([riderId]);
+                    renderChat(chatId, riderProfile[riderId]);
+                } else {
+                    showMessage("Not enough seats available.", 'Error');
+                }
+            } catch (error) {
+                showMessage("Failed to accept request: " + error.message, 'Error');
+            }
+        };
+
+        const handleRejectRequest = async (rideRequestId) => {
+            try {
+                const rideRequestRef = doc(db, `artifacts/${appId}/users/${userState.userId}/rideRequests`, rideRequestId);
+                await updateDoc(rideRequestRef, { status: 'rejected' });
+                showMessage("Request rejected.", 'Success');
+            } catch (error) {
+                showMessage("Failed to reject request: " + error.message, 'Error');
+            }
+        };
+
+        const handleSendMessage = async (e, chatId) => {
+            e.preventDefault();
+            const messageInput = document.getElementById('message-input');
+            const messageText = messageInput.value;
+            if (!messageText) return;
+
+            try {
+                const messagesCollectionRef = collection(db, `artifacts/${appId}/public/chats/${chatId}/messages`);
+                await addDoc(messagesCollectionRef, {
+                    senderId: userState.userId,
+                    text: messageText,
+                    timestamp: new Date().toISOString()
+                });
+                messageInput.value = '';
+            } catch (error) {
+                showMessage("Failed to send message: " + error.message, 'Error');
+            }
+        };
+
+        const handleLogout = async () => {
+            try {
+                await signOut(auth);
+                showMessage("Logged out successfully.", 'Success');
+                userState = { isLoggedIn: false, userId: null, userRole: null, profile: null };
+                landingPage.classList.remove('hidden');
+                mainApp.classList.add('hidden');
+                cleanupListeners();
+            } catch (error) {
+                showMessage("Logout failed: " + error.message, 'Error');
+            }
+        };
+        
+        const handleRideSearch = async (e) => {
+            e.preventDefault();
+            const pickup = document.getElementById('search-pickup').value.toLowerCase();
+            const dropoff = document.getElementById('search-dropoff').value.toLowerCase();
+            const ridesCollectionRef = collection(db, `artifacts/${appId}/public/data`, 'rides');
+            
+            const rides = [];
+            const querySnapshot = await getDocs(query(ridesCollectionRef, where('status', '==', 'available')));
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                if (data.pickup.toLowerCase().includes(pickup) && data.dropoff.toLowerCase().includes(dropoff)) {
+                    rides.push({ id: doc.id, ...data });
+                }
+            });
+            renderRidesList(rides);
+        };
+
+        const fetchUserProfiles = async (userIds) => {
+            const users = {};
+            const uniqueUserIds = [...new Set(userIds)];
+            for (const userId of uniqueUserIds) {
+                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}/profile`, 'info');
+                const userDoc = await new Promise(resolve => {
+                    const unsubscribe = onSnapshot(userDocRef, (doc) => {
+                        unsubscribe();
+                        resolve(doc);
+                    });
+                });
+                if (userDoc.exists()) {
+                    users[userId] = userDoc.data();
+                } else {
+                    users[userId] = { name: "Unknown User", location: "Unknown", profilePicUrl: "https://api.dicebear.com/7.x/initials/svg?seed=Unknown" };
+                }
+            }
+            return users;
+        };
+
+        // --- Real-time Listeners ---
+        const fetchRides = () => {
+            if (!userState.isLoggedIn || userState.userRole !== 'rider') return;
+            const ridesCollectionRef = collection(db, `artifacts/${appId}/public/data`, 'rides');
+            const q = query(ridesCollectionRef, where('status', '==', 'available'));
+
+            const unsubscribe = onSnapshot(q, (snapshot) => {
+                const rides = [];
+                snapshot.forEach(doc => {
+                    rides.push({ id: doc.id, ...doc.data() });
+                });
+                renderRidesList(rides);
+            });
+            currentListeners.push(unsubscribe);
+        };
+        
+        const listenForPostedRides = () => {
+             if (!userState.isLoggedIn || userState.userRole !== 'driver') return;
+             const ridesCollectionRef = collection(db, `artifacts/${appId}/public/data`, 'rides');
+             const q = query(ridesCollectionRef, where('driverId', '==', userState.userId));
+
+             const unsubscribe = onSnapshot(q, (snapshot) => {
+                 const rides = [];
+                 snapshot.forEach(doc => {
+                     rides.push({ id: doc.id, ...doc.data() });
+                 });
+                 renderPostedRidesList(rides);
+             });
+             currentListeners.push(unsubscribe);
+        };
+
+        const listenForRideRequests = () => {
+            if (!userState.isLoggedIn || userState.userRole !== 'driver') return;
+            const requestsCollectionRef = collection(db, `artifacts/${appId}/users/${userState.userId}/rideRequests`);
+            const q = query(requestsCollectionRef, where('status', '==', 'pending'));
+
+            const unsubscribe = onSnapshot(q, async (snapshot) => {
+                const requestsList = document.getElementById('ride-requests-list');
+                if (!requestsList) return;
+                
+                const requests = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderRideRequests(requests);
+            });
+            currentListeners.push(unsubscribe);
+        };
+
+        const listenForAcceptedRequests = () => {
+            if (!userState.isLoggedIn || userState.userRole !== 'rider') return;
+            const requestsCollectionRef = collection(db, `artifacts/${appId}/users/${userState.userId}/rideRequests`);
+            const q = query(requestsCollectionRef, where('status', '==', 'accepted'));
+
+            const unsubscribe = onSnapshot(q, async (snapshot) => {
+                for (const doc of snapshot.docs) {
+                    const request = doc.data();
+                    const chatId = `${request.rideId}_${request.driverId}_${userState.userId}`;
+                    const driverProfile = await fetchUserProfiles([request.driverId]);
+                    renderChat(chatId, driverProfile[request.driverId]);
+                }
+            });
+            currentListeners.push(unsubscribe);
+        };
+
+        const listenForChatMessages = (chatId) => {
+            const messagesCollectionRef = collection(db, `artifacts/${appId}/public/chats/${chatId}/messages`);
+            const q = query(messagesCollectionRef);
+
+            const unsubscribe = onSnapshot(q, (snapshot) => {
+                const messagesContainer = document.getElementById('messages-container');
+                if (!messagesContainer) return;
+                
+                messagesContainer.innerHTML = '';
+                const messages = [];
+                snapshot.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+                
+                messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+                messages.forEach(msg => {
+                    const isUser = msg.senderId === userState.userId;
+                    const messageBubble = document.createElement('div');
+                    messageBubble.className = `p-3 rounded-xl max-w-[80%] ${isUser ? 'chat-bubble-user self-end' : 'chat-bubble-other self-start'}`;
+                    messageBubble.textContent = msg.text;
+                    messagesContainer.appendChild(messageBubble);
+                });
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            });
+            currentListeners.push(unsubscribe);
+        };
+
+        // --- Main App Flow ---
+        const initApp = async () => {
+            ctaHeader.addEventListener('click', () => {
+                landingPage.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+                renderLogin();
+            });
+
+            ctaHero.addEventListener('click', () => {
+                landingPage.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+                renderLogin();
+            });
+
+            logoutButton.addEventListener('click', handleLogout);
+            profileButton.addEventListener('click', renderProfile);
+            appLogo.addEventListener('click', () => {
+                if (userState.isLoggedIn) {
+                    if (userState.userRole === 'driver') {
+                        renderDriverDashboard();
+                    } else {
+                        renderRiderDashboard();
+                    }
+                } else {
+                    returnToLanding();
+                }
+            });
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userProfileRef = doc(db, `artifacts/${appId}/users/${user.uid}/profile`, 'info');
+                    try {
+                        const userDoc = await new Promise((resolve) => {
+                            const unsubscribe = onSnapshot(userProfileRef, (doc) => {
+                                unsubscribe();
+                                resolve(doc);
+                            });
+                        });
+
+                        if (userDoc.exists()) {
+                            const data = userDoc.data();
+                            userState.isLoggedIn = true;
+                            userState.userId = user.uid;
+                            userState.userRole = data.role;
+                            userState.profile = data; // Store the profile data
+                            landingPage.classList.add('hidden');
+                            mainApp.classList.remove('hidden');
+                            if (data.role === 'driver') {
+                                renderDriverDashboard();
+                            } else {
+                                renderRiderDashboard();
+                            }
+                        } else {
+                            showMessage("User profile not found. Please try again.", 'Error');
+                            await signOut(auth);
+                        }
+                    } catch (error) {
+                        showMessage("Error fetching user profile: " + error.message, 'Error');
+                        await signOut(auth);
+                    }
+                } else {
+                    userState = { isLoggedIn: false, userId: null, userRole: null, profile: null };
+                    cleanupListeners();
+                }
+            });
+        };
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
